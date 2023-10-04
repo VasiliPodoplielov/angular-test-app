@@ -14,6 +14,6 @@ export const authRoutes: Routes = [
   {
     path: '',
     pathMatch: 'full',
-    redirectTo: 'login'
+    redirectTo: '/auth/login'
   }
 ]

@@ -6,5 +6,8 @@ import { Component } from '@angular/core';
   styleUrls: ['./registration.component.css']
 })
 export class RegistrationComponent {
-
+  cardTitle: string = 'Registration';
+  buttonLinkTitle: string = 'Login';
+  buttonLink: string = '/auth/login';
+  mainButtonTitle: string = 'Register';
 }
