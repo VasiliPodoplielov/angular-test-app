@@ -5,22 +5,26 @@ import { MatCardModule } from '@angular/material/card';
 import { MatDividerModule } from '@angular/material/divider';
 import { RouterLink } from '@angular/router';
 import { MatButtonModule } from '@angular/material/button';
+import { MatFormFieldModule } from '@angular/material/form-field';
+import { ToastComponent } from './components/toast/toast.component';
 
 
 
 @NgModule({
   declarations: [
     CenterCardWrapperComponent,
+    ToastComponent,
   ],
   exports: [
-    CenterCardWrapperComponent
+    CenterCardWrapperComponent,
   ],
   imports: [
     CommonModule,
     MatCardModule,
     MatDividerModule,
     RouterLink,
-    MatButtonModule
+    MatButtonModule,
+    MatFormFieldModule
   ]
 })
 export class CommonUiModule { }

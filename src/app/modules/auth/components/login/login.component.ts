@@ -1,5 +1,9 @@
 import { Component } from '@angular/core';
 import { FormBuilder, Validators } from '@angular/forms';
+import { LoginFormGroup } from './models';
+import { fieldErrorsMap } from '../../../../constants';
+import { AuthService } from '../../auth.service';
+import { MatSnackBar } from '@angular/material/snack-bar';
 
 @Component({
   selector: 'app-login',
@@ -12,27 +16,24 @@ export class LoginComponent {
   buttonLink: string = '/auth/registration';
   mainButtonTitle: string = 'Sign in';
 
-  loginForm = this.fb.group({
+  formGroup: LoginFormGroup = this.fb.group({
     email: ['', [Validators.email, Validators.required]],
     password: ['', Validators.required],
   });
 
-  constructor(private fb: FormBuilder) {
+  constructor(private fb: FormBuilder, private authService: AuthService) {
   }
 
-  onSubmit() {
-    console.log(this.loginForm.value);
+  onSubmit(): void {
+    const { email, password } = this.formGroup.controls;
+
+    if (!this.formGroup.valid) return;
+
+    this.authService.signIn({
+      email: email.value || '',
+      password: password.value || '',
+    });
   }
 
-  getEmailError(): string | void {
-    const emailControl = this.loginForm.controls.email;
-
-    if (emailControl.hasError('required')) {
-      return 'Field is required';
-    }
-
-    if (emailControl.hasError('email')) {
-      return 'Field should be valid email';
-    }
-  }
+  protected readonly fieldErrorsMap = fieldErrorsMap;
 }
