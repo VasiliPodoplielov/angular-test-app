@@ -1,4 +1,4 @@
-<form [formGroup]="loginForm" (ngSubmit)="onSubmit()">
+<form [formGroup]="formGroup" (ngSubmit)="onSubmit()">
   <app-center-card-wrapper
     [title]="cardTitle"
     [buttonLink]="buttonLink"
@@ -8,16 +8,20 @@
     <div>
       <mat-form-field class="width-100">
         <mat-label>E-mail</mat-label>
-        <input matInput placeholder="Enter your email" formControlName="email" required>
-        <mat-error id="email">{{getEmailError()}}</mat-error>
+        <input matInput placeholder="Enter your email" formControlName="email">
+        <app-input-error-text
+          [errors]="formGroup.controls"
+          [control]="formGroup.controls.email"
+          controlName="email"
+        ></app-input-error-text>
       </mat-form-field>
     </div>
 
     <div>
       <mat-form-field class="width-100">
         <mat-label>Password</mat-label>
-        <input matInput placeholder="Enter your password" formControlName="password" required>
-        <mat-error id="password"></mat-error>
+        <input matInput placeholder="Enter your password" formControlName="password">
+        <app-input-error-text></app-input-error-text>
       </mat-form-field>
     </div>
   </app-center-card-wrapper>

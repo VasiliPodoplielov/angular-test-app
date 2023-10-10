@@ -1,5 +1,6 @@
 import { Component } from '@angular/core';
-import { FormBuilder, Validators } from '@angular/forms';
+import { FormBuilder, FormGroup, Validators } from '@angular/forms';
+import { LoginFormGroup } from './models';
 
 @Component({
   selector: 'app-login',
@@ -12,7 +13,7 @@ export class LoginComponent {
   buttonLink: string = '/auth/registration';
   mainButtonTitle: string = 'Sign in';
 
-  loginForm = this.fb.group({
+  formGroup: LoginFormGroup = this.fb.group({
     email: ['', [Validators.email, Validators.required]],
     password: ['', Validators.required],
   });
@@ -20,12 +21,12 @@ export class LoginComponent {
   constructor(private fb: FormBuilder) {
   }
 
-  onSubmit() {
-    console.log(this.loginForm.value);
+  onSubmit(): void {
+    console.log(this.formGroup.value);
   }
 
   getEmailError(): string | void {
-    const emailControl = this.loginForm.controls.email;
+    const emailControl = this.formGroup.controls.email;
 
     if (emailControl.hasError('required')) {
       return 'Field is required';
