@@ -1,0 +1,14 @@
+{
+  "targets": {
+    "test-angular-application-818a7": {
+      "hosting": {
+        "angular-tutor-app": [
+          "test-angular-application-818a7"
+        ]
+      }
+    }
+  },
+  "projects": {
+    "default": "test-angular-application-818a7"
+  }
+}
