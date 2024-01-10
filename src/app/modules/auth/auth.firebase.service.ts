@@ -23,7 +23,7 @@ export class AuthFirebaseService {
   signIn({ email, password }: Credentials): Observable<firebase.auth.UserCredential> {
     return new Observable((observer) => {
       this.afAuth.signInWithEmailAndPassword(email, password)
-        .then((credentials) => {
+        .then((credentials: firebase.auth.UserCredential) => {
           observer.next(credentials);
         })
         .catch((error) => {
@@ -36,7 +36,7 @@ export class AuthFirebaseService {
   signUp({ email, password }: Credentials): Observable<firebase.auth.UserCredential> {
     return new Observable((observer) => {
       this.afAuth.createUserWithEmailAndPassword(email, password)
-        .then((credentials) => {
+        .then((credentials: firebase.auth.UserCredential) => {
           observer.next(credentials);
         })
         .catch((error) => {

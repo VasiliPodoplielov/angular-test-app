@@ -1,9 +1,7 @@
 import { Component } from '@angular/core';
 import { FormBuilder, Validators } from '@angular/forms';
-import { LoginFormGroup } from './models';
-import { fieldErrorsMap } from '../../../../constants';
+import { FIELD_ERRORS_MAP } from '../../../../constants';
 import { AuthService } from '../../auth.service';
-import { MatSnackBar } from '@angular/material/snack-bar';
 
 @Component({
   selector: 'app-login',
@@ -16,7 +14,7 @@ export class LoginComponent {
   buttonLink: string = '/auth/registration';
   mainButtonTitle: string = 'Sign in';
 
-  formGroup: LoginFormGroup = this.fb.group({
+  formGroup = this.fb.group({
     email: ['', [Validators.email, Validators.required]],
     password: ['', Validators.required],
   });
@@ -35,5 +33,5 @@ export class LoginComponent {
     }).subscribe(); // TODO: add redirect to somewhere and update cache with credentials
   }
 
-  protected readonly fieldErrorsMap = fieldErrorsMap;
+  protected readonly fieldErrorsMap = FIELD_ERRORS_MAP;
 }

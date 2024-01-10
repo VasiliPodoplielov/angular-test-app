@@ -1,11 +1,11 @@
-import { Injectable, NgZone } from '@angular/core';
+import {Injectable, NgZone, OnDestroy, OnInit} from '@angular/core';
 import { AngularFirestore, AngularFirestoreDocument } from '@angular/fire/compat/firestore';
 import { AngularFireAuth } from '@angular/fire/compat/auth';
 import firebase from 'firebase/compat/app';
 import { Router } from '@angular/router';
 import { Credentials } from './models';
 import { ToastService } from '../../services/toast.service';
-import { catchError, from, Observable, ObservableInput, of, tap } from 'rxjs';
+import {catchError, from, Observable, ObservableInput, of, Subscription, tap} from 'rxjs';
 import { AuthFirebaseService } from './auth.firebase.service';
 
 // TODO: Use RxJS in each method.
@@ -13,8 +13,9 @@ import { AuthFirebaseService } from './auth.firebase.service';
 @Injectable({
   providedIn: 'root'
 })
-export class AuthService {
+export class AuthService implements OnInit, OnDestroy {
   userData: any;
+  authStateSubscription: Subscription;
 
   constructor(
     public authFirebase: AuthFirebaseService,
@@ -23,8 +24,10 @@ export class AuthService {
     public router: Router,
     public ngZone: NgZone,
     public toastService: ToastService,
-  ) {
-    this.afAuth.authState.subscribe((user) => {
+  ) {}
+
+  ngOnInit() {
+    this.authStateSubscription = this.afAuth.authState.subscribe((user) => {
       if (user) {
         this.userData = user;
 
@@ -38,7 +41,7 @@ export class AuthService {
   signIn({ email, password }: Credentials): Observable<firebase.auth.UserCredential> {
     return this.authFirebase.signIn({ email, password }).pipe(
       tap(() => this.toastService.showToast(`User with email ${email} successfully logged in`)),
-      catchError((error: firebase.auth.Error, caught): ObservableInput<firebase.auth.UserCredential> => {
+      catchError((error: firebase.auth.Error): ObservableInput<firebase.auth.UserCredential> => {
         this.toastService.showToast(`ERROR: ${error.message}`);
 
         return of({} as firebase.auth.UserCredential);
@@ -103,5 +106,9 @@ export class AuthService {
     const user = JSON.parse(localStorage.getItem('user')!);
 
     return user !== null && user.emailVerified !== false;
+  }
+
+  ngOnDestroy() {
+    this.authStateSubscription.unsubscribe();
   }
 }

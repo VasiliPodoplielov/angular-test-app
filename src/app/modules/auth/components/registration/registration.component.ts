@@ -1,6 +1,6 @@
 import { Component } from '@angular/core';
 import { FormBuilder, Validators } from '@angular/forms';
-import { fieldErrorsMap } from '../../../../constants';
+import { FIELD_ERRORS_MAP } from '../../../../constants';
 import { AuthService } from '../../auth.service';
 import { Router } from '@angular/router';
 
@@ -44,5 +44,5 @@ export class RegistrationComponent {
     })
   }
 
-  protected readonly fieldErrorsMap = fieldErrorsMap;
+  protected readonly fieldErrorsMap = FIELD_ERRORS_MAP;
 }

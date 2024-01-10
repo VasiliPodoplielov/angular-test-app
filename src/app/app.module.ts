@@ -5,7 +5,7 @@ import { AppComponent } from './app.component';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { RouterModule } from '@angular/router';
 import { appRoutes } from './routes';
-import { firebaseConfig } from '../../firebase.config';
+import { FIREBASE_CONFIG } from '../../FIREBASE_CONFIG';
 import { AngularFireModule } from '@angular/fire/compat';
 import { MatSnackBarModule } from '@angular/material/snack-bar';
 
@@ -19,7 +19,7 @@ import { MatSnackBarModule } from '@angular/material/snack-bar';
     RouterModule.forRoot(
       appRoutes
     ),
-    AngularFireModule.initializeApp(firebaseConfig),
+    AngularFireModule.initializeApp(FIREBASE_CONFIG),
     MatSnackBarModule,
   ],
   providers: [MatSnackBarModule],
