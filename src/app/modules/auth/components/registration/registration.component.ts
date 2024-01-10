@@ -2,6 +2,7 @@ import { Component } from '@angular/core';
 import { FormBuilder, Validators } from '@angular/forms';
 import { fieldErrorsMap } from '../../../../constants';
 import { AuthService } from '../../auth.service';
+import { Router } from '@angular/router';
 
 @Component({
   selector: 'app-registration',
@@ -21,7 +22,11 @@ export class RegistrationComponent {
     password: ['', [Validators.required]],
   });
 
-  constructor(private fb: FormBuilder, private authService: AuthService) {
+  constructor(
+    private fb: FormBuilder,
+    private authService: AuthService,
+    public router: Router,
+  ) {
   }
 
   onSubmit() {
@@ -32,6 +37,10 @@ export class RegistrationComponent {
     this.authService.signUp({
       email: email.value || '',
       password: password.value || '',
+    }).subscribe((response) => {
+      if (response.user) {
+        this.router.navigate(['/auth/login']);
+      }
     })
   }
 
