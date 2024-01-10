@@ -32,7 +32,7 @@ export class LoginComponent {
     this.authService.signIn({
       email: email.value || '',
       password: password.value || '',
-    });
+    }).subscribe(); // TODO: add redirect to somewhere and update cache with credentials
   }
 
   protected readonly fieldErrorsMap = fieldErrorsMap;
