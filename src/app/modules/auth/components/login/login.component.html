@@ -1,0 +1,25 @@
+<form [formGroup]="formGroup" (ngSubmit)="onSubmit()">
+  <app-center-card-wrapper
+    [title]="cardTitle"
+    [buttonLink]="buttonLink"
+    [buttonLinkTitle]="buttonLinkTitle"
+    [mainButtonTitle]="mainButtonTitle"
+  >
+    <div>
+      <mat-form-field class="width-100">
+        <mat-label>E-mail</mat-label>
+        <input matInput placeholder="Enter your email" formControlName="email">
+        <mat-error *ngIf="formGroup.controls.email.hasError('required')">{{fieldErrorsMap.required}}</mat-error>
+        <mat-error *ngIf="formGroup.controls.email.hasError('email')">{{fieldErrorsMap.email}}</mat-error>
+      </mat-form-field>
+    </div>
+
+    <div>
+      <mat-form-field class="width-100">
+        <mat-label>Password</mat-label>
+        <input matInput placeholder="Enter your password" formControlName="password">
+        <mat-error *ngIf="formGroup.controls.password.hasError('required')">{{fieldErrorsMap.required}}</mat-error>
+      </mat-form-field>
+    </div>
+  </app-center-card-wrapper>
+</form>

@@ -5,6 +5,9 @@ import { AppComponent } from './app.component';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { RouterModule } from '@angular/router';
 import { appRoutes } from './routes';
+import { FIREBASE_CONFIG } from '../../FIREBASE_CONFIG';
+import { AngularFireModule } from '@angular/fire/compat';
+import { MatSnackBarModule } from '@angular/material/snack-bar';
 
 @NgModule({
   declarations: [
@@ -16,8 +19,10 @@ import { appRoutes } from './routes';
     RouterModule.forRoot(
       appRoutes
     ),
+    AngularFireModule.initializeApp(FIREBASE_CONFIG),
+    MatSnackBarModule,
   ],
-  providers: [],
+  providers: [MatSnackBarModule],
   bootstrap: [AppComponent]
 })
 export class AppModule { }

@@ -5,10 +5,10 @@ export const appRoutes: Routes = [
   {
     path: '',
     canActivate: [authGuard],
-    loadChildren: () => import('./main/main.module').then(m => m.MainModule)
+    loadChildren: () => import('./modules/main/main.module').then(m => m.MainModule)
   },
   {
     path: 'auth',
-    loadChildren: () => import('./auth/auth.module').then(m => m.AuthModule)
+    loadChildren: () => import('./modules/auth/auth.module').then(m => m.AuthModule)
   }
 ]
