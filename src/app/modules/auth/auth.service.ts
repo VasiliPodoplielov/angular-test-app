@@ -7,6 +7,7 @@ import { Credentials } from './models';
 import { ToastService } from '../../services/toast.service';
 import {catchError, from, Observable, ObservableInput, of, Subscription, tap} from 'rxjs';
 import { AuthFirebaseService } from './auth.firebase.service';
+import { LocalStorageService } from '../../services/local-storage.service';
 
 // TODO: Use RxJS in each method.
 
@@ -24,6 +25,7 @@ export class AuthService implements OnInit, OnDestroy {
     public router: Router,
     public ngZone: NgZone,
     public toastService: ToastService,
+    public localStorage: LocalStorageService,
   ) {}
 
   ngOnInit() {
@@ -31,9 +33,9 @@ export class AuthService implements OnInit, OnDestroy {
       if (user) {
         this.userData = user;
 
-        localStorage.setItem('user', JSON.stringify(this.userData));
+        this.localStorage.set('user', JSON.stringify(this.userData));
       } else {
-        localStorage.setItem('user', 'null');
+        this.localStorage.set('user', 'null');
       }
     })
   }
@@ -64,7 +66,7 @@ export class AuthService implements OnInit, OnDestroy {
 
   signOut() {
     return this.afAuth.signOut().then(() => {
-      localStorage.removeItem('user');
+      this.localStorage.remove('user');
       this.router.navigate(['/auth/login']);
     })
   }
@@ -103,7 +105,7 @@ export class AuthService implements OnInit, OnDestroy {
   }
 
   get isLoggedIn(): boolean {
-    const user = JSON.parse(localStorage.getItem('user')!);
+    const user = JSON.parse(this.localStorage.get('user')!);
 
     return user !== null && user.emailVerified !== false;
   }

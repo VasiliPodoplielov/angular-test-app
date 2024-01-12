@@ -16,8 +16,6 @@ export class RegistrationComponent {
   mainButtonTitle: string = 'Register';
 
   registrationForm = this.fb.group({
-    // firstName: ['', [Validators.required]],
-    // lastName: ['', [Validators.required]],
     email: ['', [Validators.email, Validators.required]],
     password: ['', [Validators.required]],
   });
