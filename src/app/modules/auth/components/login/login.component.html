@@ -17,7 +17,7 @@
     <div>
       <mat-form-field class="width-100">
         <mat-label>Password</mat-label>
-        <input matInput placeholder="Enter your password" formControlName="password">
+        <input type="password" matInput placeholder="Enter your password" formControlName="password">
         <mat-error *ngIf="formGroup.controls.password.hasError('required')">{{fieldErrorsMap.required}}</mat-error>
       </mat-form-field>
     </div>

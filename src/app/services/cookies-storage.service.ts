@@ -4,9 +4,9 @@ import { BaseStorageService } from './base.storage.service';
 @Injectable({
   providedIn: 'root'
 })
-export class LocalStorageService extends BaseStorageService {
+export class CookiesStorageService extends BaseStorageService {
 
   constructor() {
-    super(localStorage);
+    super(sessionStorage);
   }
 }
