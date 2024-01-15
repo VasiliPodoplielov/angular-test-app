@@ -8,7 +8,6 @@ import { MatCardModule } from '@angular/material/card';
 import { CommonUiModule } from '../common-ui/common-ui.module';
 import { ReactiveFormsModule } from '@angular/forms';
 import { MatInputModule } from '@angular/material/input';
-import { MatSnackBar } from '@angular/material/snack-bar';
 
 @NgModule({
   declarations: [

@@ -3,11 +3,12 @@ import { AngularFirestore, AngularFirestoreDocument } from '@angular/fire/compat
 import { AngularFireAuth } from '@angular/fire/compat/auth';
 import firebase from 'firebase/compat/app';
 import { Router } from '@angular/router';
-import { Credentials } from './models';
-import { ToastService } from '../../services/toast.service';
+import { Credentials } from '../models';
+import { ToastService } from '../../../services/toast.service';
 import {catchError, from, Observable, ObservableInput, of, Subscription, tap} from 'rxjs';
-import { AuthFirebaseService } from './auth.firebase.service';
-import { LocalStorageService } from '../../services/local-storage.service';
+import { AuthFirebaseService } from '../auth.firebase.service';
+import { LocalStorageService } from '../../../services/local-storage.service';
+import { CookiesStorageService } from '../../../services/cookies-storage.service';
 
 // TODO: Use RxJS in each method.
 
@@ -26,10 +27,12 @@ export class AuthService implements OnInit, OnDestroy {
     public ngZone: NgZone,
     public toastService: ToastService,
     public localStorage: LocalStorageService,
+    public cookies: CookiesStorageService,
   ) {}
 
   ngOnInit() {
     this.authStateSubscription = this.afAuth.authState.subscribe((user) => {
+      console.log(user);
       if (user) {
         this.userData = user;
 
@@ -42,7 +45,10 @@ export class AuthService implements OnInit, OnDestroy {
 
   signIn({ email, password }: Credentials): Observable<firebase.auth.UserCredential> {
     return this.authFirebase.signIn({ email, password }).pipe(
-      tap(() => this.toastService.showToast(`User with email ${email} successfully logged in`)),
+      tap((user) => {
+        this.localStorage.set('user', JSON.stringify(user));
+        this.toastService.showToast(`User with email ${email} successfully logged in`)
+      }),
       catchError((error: firebase.auth.Error): ObservableInput<firebase.auth.UserCredential> => {
         this.toastService.showToast(`ERROR: ${error.message}`);
 

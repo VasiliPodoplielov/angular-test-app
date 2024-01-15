@@ -12,6 +12,8 @@ import firebase from 'firebase/compat';
 })
 export class AuthFirebaseService {
 
+  user: firebase.auth.UserCredential | null = null;
+
   constructor(
     public afs: AngularFirestore,
     public afAuth: AngularFireAuth,
