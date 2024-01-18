@@ -8,6 +8,9 @@ import { MatCardModule } from '@angular/material/card';
 import { CommonUiModule } from '../common-ui/common-ui.module';
 import { ReactiveFormsModule } from '@angular/forms';
 import { MatInputModule } from '@angular/material/input';
+import { CardModule } from 'primeng/card';
+import { InputTextModule } from 'primeng/inputtext';
+import { ButtonModule } from 'primeng/button';
 
 @NgModule({
   declarations: [
@@ -21,6 +24,9 @@ import { MatInputModule } from '@angular/material/input';
     CommonUiModule,
     ReactiveFormsModule,
     MatInputModule,
+    CardModule,
+    InputTextModule,
+    ButtonModule,
   ]
 })
 export class AuthModule { }
