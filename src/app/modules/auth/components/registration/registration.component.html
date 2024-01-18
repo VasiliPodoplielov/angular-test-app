@@ -1,38 +1,78 @@
-<form [formGroup]="registrationForm" (ngSubmit)="onSubmit()">
-  <app-center-card-wrapper
-    [title]="cardTitle"
-    [buttonLink]="buttonLink"
-    [buttonLinkTitle]="buttonLinkTitle"
-    [mainButtonTitle]="mainButtonTitle"
-  >
-<!--    <div>-->
-<!--      <mat-form-field class="width-100">-->
-<!--        <mat-label>First name:</mat-label>-->
-<!--        <input matInput placeholder="Enter your first name" formControlName="firstName" required>-->
-<!--        <mat-error *ngIf="registrationForm.controls.firstName.hasError('required')">{{fieldErrorsMap.required}}</mat-error>-->
-<!--      </mat-form-field>-->
-<!--    </div>-->
-<!--    <div>-->
-<!--      <mat-form-field class="width-100">-->
-<!--        <mat-label>Last name:</mat-label>-->
-<!--        <input matInput placeholder="Enter your first name" formControlName="lastName" required>-->
-<!--        <mat-error *ngIf="registrationForm.controls.lastName.hasError('required')">{{fieldErrorsMap.required}}</mat-error>-->
-<!--      </mat-form-field>-->
-<!--    </div>-->
-    <div>
-      <mat-form-field class="width-100">
-        <mat-label>E-mail:</mat-label>
-        <input matInput type="email" placeholder="Enter your first name" formControlName="email" required>
-        <mat-error *ngIf="registrationForm.controls.email.hasError('email')">{{fieldErrorsMap.email}}</mat-error>
-        <mat-error *ngIf="registrationForm.controls.email.hasError('required')">{{fieldErrorsMap.required}}</mat-error>
-      </mat-form-field>
+<form
+  [formGroup]="formGroup"
+  (ngSubmit)="onSubmit()"
+  class="flex justify-content-center align-items-center h-full"
+>
+  <p-card [style]="{ width: AUTH_CARD_WIDTH + 'px' }">
+    <ng-template pTemplate="title">
+      <div class="flex justify-content-center">
+        Registration
+      </div>
+    </ng-template>
+    <div class="field mb-5">
+      <span class="p-float-label">
+        <input
+          pInputText
+          id="email"
+          formControlName="email"
+          required
+          class="w-full"
+          placeholder="Enter your e-mail..."
+        />
+        <label for="email">Email</label>
+      </span>
+      <small
+        class="p-error block"
+        *ngIf="formGroup.controls.email.invalid && formGroup.controls.email.dirty && formGroup.controls.email.hasError('required')"
+      >
+        {{fieldErrorsMap.required}}
+      </small>
+      <small
+        class="p-error block"
+        *ngIf="formGroup.controls.email.invalid &&
+        formGroup.controls.email.dirty &&
+        formGroup.controls.email.hasError('email')"
+      >
+        {{fieldErrorsMap.email}}
+      </small>
     </div>
-    <div>
-      <mat-form-field class="width-100">
-        <mat-label>Password:</mat-label>
-        <input matInput type="password" autocomplete="false" placeholder="Enter your first name" formControlName="password" required>
-        <mat-error *ngIf="registrationForm.controls.password.hasError('required')">{{fieldErrorsMap.required}}</mat-error>
-      </mat-form-field>
+    <div class="field">
+      <span class="p-float-label">
+        <input
+          pInputText
+          id="password"
+          formControlName="password"
+          required
+          class="w-full"
+          placeholder="Enter your password..."
+        />
+        <label for="password">Password</label>
+      </span>
+      <small
+        class="p-error block"
+        *ngIf="formGroup.controls.email.invalid &&
+        formGroup.controls.password.dirty &&
+        formGroup.controls.password.hasError('required')"
+      >
+        {{fieldErrorsMap.required}}
+      </small>
     </div>
-  </app-center-card-wrapper>
+    <ng-template pTemplate="footer">
+      <div class="flex justify-content-between">
+        <p-button
+          routerLink='/auth/login'
+          label="Login"
+          [text]="true"
+          severity="secondary"
+          type="button"
+        />
+        <p-button
+          label="Register"
+          severity="primary"
+          type="submit"
+          [disabled]="formGroup.invalid"
+        />
+      </div>
+    </ng-template>
+  </p-card>
 </form>

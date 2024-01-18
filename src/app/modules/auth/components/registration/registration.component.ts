@@ -3,6 +3,7 @@ import { FormBuilder, Validators } from '@angular/forms';
 import { FIELD_ERRORS_MAP } from '../../../../constants';
 import { AuthService } from '../../services/auth.service';
 import { Router } from '@angular/router';
+import { AUTH_CARD_WIDTH } from '../../../common-ui/ui-constants';
 
 @Component({
   selector: 'app-registration',
@@ -10,12 +11,7 @@ import { Router } from '@angular/router';
   styleUrls: ['./registration.component.css']
 })
 export class RegistrationComponent {
-  cardTitle: string = 'Registration';
-  buttonLinkTitle: string = 'Login';
-  buttonLink: string = '/auth/login';
-  mainButtonTitle: string = 'Register';
-
-  registrationForm = this.fb.group({
+  formGroup = this.fb.group({
     email: ['', [Validators.email, Validators.required]],
     password: ['', [Validators.required]],
   });
@@ -28,9 +24,9 @@ export class RegistrationComponent {
   }
 
   onSubmit() {
-    const { email, password } = this.registrationForm.controls;
+    if (!this.formGroup.valid) return;
 
-    if (!this.registrationForm.valid) return;
+    const { email, password } = this.formGroup.controls;
 
     this.authService.signUp({
       email: email.value || '',
@@ -43,4 +39,5 @@ export class RegistrationComponent {
   }
 
   protected readonly fieldErrorsMap = FIELD_ERRORS_MAP;
+  protected readonly AUTH_CARD_WIDTH = AUTH_CARD_WIDTH;
 }
