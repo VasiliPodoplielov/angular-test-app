@@ -1,0 +1,27 @@
+<p-toolbar
+  styleClass="bg-gray-900 shadow-2"
+  [style]="{
+      'border-radius': '0',
+      'border': 'none',
+      'background-image': 'linear-gradient(to right, var(--bluegray-800), var(--bluegray-500))'
+    }"
+>
+  <div class="p-toolbar-group-start">
+    <p-button
+      icon="pi pi-bars"
+      [text]="true"
+      size="large"
+      (onClick)="toggleSidebar()"
+    ></p-button>
+    <p-button
+      label="Test application"
+      [outlined]="true"
+      [routerLink]="['/']"
+      size="large"
+    ></p-button>
+  </div>
+  <div class="p-toolbar-group-end">
+    <span class="text-white mr-3">{{userName}}</span>
+    <p-button label="Logout" severity="primary"></p-button>
+  </div>
+</p-toolbar>

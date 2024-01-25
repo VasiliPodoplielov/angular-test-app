@@ -1,13 +1,19 @@
-<mat-toolbar color="primary">
-  <a mat-button routerLink="/">My Test Application</a>
-</mat-toolbar>
-<mat-sidenav-container>
-  <mat-sidenav fixedInViewport fixedTopGap="64" mode="side" opened>
-    <mat-nav-list>
-      <a mat-list-item routerLink="profile">Profile</a>
-    </mat-nav-list>
-  </mat-sidenav>
-  <mat-sidenav-content>
-    <router-outlet></router-outlet>
-  </mat-sidenav-content>
-</mat-sidenav-container>
+<div class="min-h-full">
+  <app-toolbar [toggleSidebar]="toggleSideBar"></app-toolbar>
+
+  <app-sidebar [isVisible]="sidebarVisible"></app-sidebar>
+</div>
+
+<!--<mat-toolbar color="primary">-->
+<!--  <a mat-button routerLink="/">My Test Application</a>-->
+<!--</mat-toolbar>-->
+<!--<mat-sidenav-container>-->
+<!--  <mat-sidenav fixedInViewport fixedTopGap="64" mode="side" opened>-->
+<!--    <mat-nav-list>-->
+<!--      <a mat-list-item routerLink="profile">Profile</a>-->
+<!--    </mat-nav-list>-->
+<!--  </mat-sidenav>-->
+<!--  <mat-sidenav-content>-->
+<!--    <router-outlet></router-outlet>-->
+<!--  </mat-sidenav-content>-->
+<!--</mat-sidenav-container>-->
